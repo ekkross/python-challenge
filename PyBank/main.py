@@ -18,16 +18,24 @@
 import os
 import csv
 
-csvpath = os.path.join("..", "Resources", "budget-data.csv")
+csvpath = os.path.join("..", "uo_bootcamp", "budget-data.csv")
 
 with open(csvpath, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
 
-    for row in csvreader:
-        if row[0] == video:
-            print(row[0] + " is rated " + row[1] + " with a rating of " + row[5])
+	total_months = sum(1 for row in csvreader)
+	total_money
+	average_change
+	increase
+	decrease
+
 
 print("Financial Analysis")
 print("----------------------------")
+print("Total Months: " + total_months)
+print("Total: " + total_money)
+print("Average Change: " + average_change)
+print("Greatest Increase in Profits: " + increase)
+print("Greatest Decrease in Profits: " + decrease)
 
 
