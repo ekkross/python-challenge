@@ -21,6 +21,9 @@ import csv
 csvpath = os.path.join("..", "budget-data.csv")
 outfile = os.path.join("..", "PyBank.txt")
 
+average_change = 0
+increase_profit = 0
+decrease_profit = 0
 monthly_changes = []
 monthly_changes_for_month = []
 
@@ -31,39 +34,38 @@ with open(csvpath, 'r', newline="") as csvfile:
 
     profit_by_month = dict(csvreader)
 
-    profits = list(map(int, profit_by_month.values()))
-    month_list = list(profit_by_month.keys())
+    profits=list(profit_by_month.values())
+    months=list(profit_by_month.keys())
+    profits=list(map(int, profits))
 
     for i in range(len(profits) - 1):
         monthly_changes.append(profits[i + 1] - profits[i])
-        monthly_changes_for_month.append(month_list[i])
+        monthly_changes_for_month.append(months[i])
 
-    increase_profit = max(monthly_changes)
-    increase_month_idx = monthly_changes.index(increase_profit)
-    increase_month = month_list[increase_month_idx + 1]
+    increase_profit=max(monthly_changes)
+    increase_month_idx=monthly_changes.index(increase_profit)
+    increase_month=months[increase_month_idx+1]
 
-    decrease_profit = max(monthly_changes)
-    decrease_month_idx = monthly_changes.index(decrease_profit)
-    decrease_month = month_list[decrease_month_idx + 1]
+    decrease_profit=min(monthly_changes)
+    decrease_month_idx=monthly_changes.index(decrease_profit)
+    decrease_month=months[decrease_month_idx+1]
 
-    total_months = str(len(profit_by_month))
-    total_money = str(sum(profits))
     average_change = sum(monthly_changes)/len(monthly_changes)
 
 print("Financial Analysis")
 print("----------------------------")
-print("Total Months: " + str(len(total_months))) 
-print(f"Total: ${total_money}")
-print(f"Average Change: ${round(average_change,2)}")
+print("Total Months: " + str(len(profit_by_month))) 
+print("Total: $" + str(sum(profits)))
+print(f"Average Change: ${round(average_change, 2)}")
 print(f"Greatest Increase in Profits:: {increase_month} (${increase_profit})")
 print(f"Greatest Decrease in Profits:: {decrease_month} (${decrease_profit})")
 
 with open(outfile,"w") as file:
     file.write("Financial Analysis\n")
-    file.write("________________________________________________\n")
-    file.write("Total Months: " + str(len(total_months)))
+    file.write("----------------------------\n")
+    file.write("Total Months: " + str(len(profit_by_month))) 
     file.write("\n")
-    file.write(f"Total: ${total_money}\n")
-    file.write(f"Average Change: ${round(average_change,2)}\n")
+    file.write("Total: $" + str(sum(profits)))
+    file.write(f"Average Change: ${round(average_change, 2)}\n")
     file.write(f"Greatest Increase in Profits:: {increase_month} (${increase_profit})\n")
     file.write(f"Greatest Decrease in Profits:: {decrease_month} (${decrease_profit})")

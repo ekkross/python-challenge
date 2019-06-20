@@ -20,3 +20,48 @@
 # • In addition, your final script should both print the analysis to the terminal and export a
 # text file with the results.
 
+import os
+import csv
+
+source_file = os.path.join("..", "election_data.csv")
+
+outfile = os.path.join("..", "PyPoll.txt")
+
+total_votes = 0
+results = {}
+with open(source_file, 'r') as csvfile:
+    csvreader = csv.reader(csvfile, delimiter=',')
+    next(csvreader)
+
+    for row in csvreader:
+        candidate = str(row[2])
+        if candidate in results:
+            results[candidate] = results[candidate] + 1   
+        else:
+            results[candidate] = 1
+
+winner = max(results, key=results.get)
+
+print("Election Results")
+print("-------------------------")
+print("Total Votes: " + str(sum(results.values() )))
+print("-------------------------")
+
+for key in results:
+    print (key + ": " + str(round((results[key]/sum(results.values())) * 100 , 3 )) + "% (" + str(results[key]) + ")")
+
+print("-------------------------")
+print(f"Winner: {winner}")
+print("-------------------------")
+
+with open(outfile,"w") as file:
+    file.write("Election Results\n")
+    file.write("\n-------------------------\n")
+    file.write("Total Votes: " + str(sum(results.values())))
+    file.write("\n-------------------------\n")
+
+    for key in results:
+        file.write(key + ": " + str(round((results[key]/sum(results.values())) * 100 , 3 )) + "% (" + str(results[key]) + ")")
+        file.write("\n-------------------------\n")
+        file.write(f"Winner: {winner}")
+        file.write("\n-------------------------\n")
