@@ -51,7 +51,7 @@ for key in results:
     print (key + ": " + str(round((results[key]/sum(results.values())) * 100 , 3 )) + "% (" + str(results[key]) + ")")
 
 print("-------------------------")
-print(f"Winner: {winner}")
+print("Winner: " + winner)
 print("-------------------------")
 
 with open(outfile,"w") as file:
@@ -63,5 +63,5 @@ with open(outfile,"w") as file:
     for key in results:
         file.write(key + ": " + str(round((results[key]/sum(results.values())) * 100 , 3 )) + "% (" + str(results[key]) + ")")
         file.write("\n-------------------------\n")
-        file.write(f"Winner: {winner}")
+        file.write("Winner: " + winner)
         file.write("\n-------------------------\n")
