@@ -1,0 +1,5 @@
+You must include a written description of three observable trends based on the data.
+
+1) male players tend to buy slightly less expensive items more frequently than women and non-disclosed players
+2) the age groups that buy the most items are those in their early earning years.  This declines in a player's 30's.
+3) as the price of an item decreases, so does its popularity.  OR as an item's popularity decreases, so does its price?
